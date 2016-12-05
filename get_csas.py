@@ -9,14 +9,12 @@ get CSA database from Cisco API
 """
 
 # import requests
-import json
 import datetime
+import os
 import urllib.request
 from urllib.parse import urlencode
 
 import write_csa
-import CSA_CRUD as db
-from skputils import insert_csa
 
 
 def get_csas(ciscoToken, csaParam, csaParamValue, bendType):
@@ -42,6 +40,8 @@ def get_csas(ciscoToken, csaParam, csaParamValue, bendType):
     csaUrlAdv = '/advisories/cvrf/advisory/'  # <advisoryId>
     csaUrlSev = '/advisories/cvrf/severity/'  # <critical|high|medium|low>
     csaUrlLatest = '/advisories/cvrf/latest/'  # <number of latest csas>
+
+    os.makedirs('./CSAs', exist_ok=True)
 
     if csaParam == 'YEAR':
         csaUrl = csaBaseUrl + csaUrlY + csaParamValue

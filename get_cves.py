@@ -42,6 +42,7 @@ get CVE database from Cisco API
 
 """
 
+import os
 import requests
 import json
 import urllib
@@ -50,6 +51,8 @@ import datetime
 
 def get_cves(ciscoToken):
     date = str(datetime.date.today())
+
+    os.makedirs('./CSAs', exist_ok=True)
 
     ciscoTokenHeader = "Bearer " + ciscoToken
     advUrl = 'https://api.cisco.com/security/advisories/cvrf/year/2016'
