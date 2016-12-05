@@ -1,0 +1,11 @@
+CiscoCreds:
+    clientId: zetgk3mrfy58nwvbe239tqtr
+    clientSecret: JkSydPCAnS28M82dKXG94RfY
+
+CsaConf:
+    backendType: CSV
+mongodb:
+    host: localhost
+    port: 27017
+    csadb: testCSAs
+    
