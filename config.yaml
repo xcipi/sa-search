@@ -3,7 +3,7 @@ CiscoCreds:
     clientSecret: JkSydPCAnS28M82dKXG94RfY
 
 CsaConf:
-    backendType: CSV
+    backendType: DB
 mongodb:
     host: localhost
     port: 27017

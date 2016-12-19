@@ -18,6 +18,28 @@ import argparse
 from lxml import etree
 
 
+class CSA:
+    """
+    Structure for CSA XML parsing
+    """
+    def __init__(self):
+        self.DocumentTitle = ''
+        self.DocumentType = ''
+        self.ContactDetails = ''
+        self.IssuingAuthority = ''
+        self.DocumentPublisher = ''
+        self.DocumentTracking = ''
+        self.DocumentNotes = ''
+        self.DocumentDistribution = ''
+        self.AggregateSeverity = ''
+        self.DocumentReferences = ''
+        self.Acknowledgments = ''
+        self.ProductTree = ''
+        self.Threats = ''
+        self.Vulnerability = ''
+
+
+
 class CVRF_Syntax(object):
     """
     All of the CVRF Elements and Namespaces are kept here.  As CVRF evolves, make appropriate changes here.
@@ -325,8 +347,8 @@ def parse_cvrf_recursive(element,precede):
         attr = ''
         if child.attrib:
             attr = child.attrib
-        print_node(child,1)
-#        print (precede, '{ \'tag\':\'', chop_ns_prefix(child.tag), '\', \'attribs\': ', attr, ', \'text\': \'', child.text, '\', \'subtags\': ', parse_cvrf_recursive(child,precede), '}')
+#        print_node(child,1)
+        print (precede, '{ \'tag\':\'', chop_ns_prefix(child.tag), '\', \'attribs\': ', attr, ', \'text\': \'', child.text, '\', \'subtags\': ', parse_cvrf_recursive(child,precede), '}')
         print (str(precede) + chop_ns_prefix(child.tag), '> ATTRIBS: ', attr, ' > TEXT: ', child.text.strip())
 #        parse_cvrf_recursive(child,precede)
         
@@ -338,6 +360,9 @@ def main():
 
     parse_cvrf_recursive(CvrfRoot,'')
  
+    test = CSA()
+
+    print (test.DocumentTitle, test.DocumentType, test.ContactDetails, test.IssuingAuthority, test.DocumentPublisher, test.DocumentTracking, test.DocumentNotes, test.DocumentDistribution, test.AggregateSeverity, test.DocumentReferences, test.Acknowledgments, test.ProductTree, test.Threats, test.Vulnerability)
 
 '''
     for file in os.listdir("CSAs/"):

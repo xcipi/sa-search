@@ -60,8 +60,8 @@ def get_csas(ciscoToken, csaParam, csaParamValue, bendType):
 
     csaHeaders = {'Accept': 'application/json', 'Authorization': ciscoTokenHeader}
     data = urlencode('').encode('utf8')
-    print ('### Headers: ', csaHeaders)
-    print ('### Data: ', data)
+#    print ('### Headers: ', csaHeaders)
+#    print ('### Data: ', data)
     req = urllib.request.Request(csaUrl, headers=csaHeaders)
     try:
         csaResponseRaw = urllib.request.urlopen(req).read()

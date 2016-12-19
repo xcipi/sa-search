@@ -9,6 +9,7 @@ write CVE database to CSV file
 """
 
 #import requests
+import os
 import re
 import json
 import datetime
@@ -23,13 +24,16 @@ client = MongoClient('localhost:27017')
 db = client.CSAs
 date = str(datetime.date.today())
 
+os.makedirs('./CSAs', exist_ok=True)
+os.makedirs('./REPORTS', exist_ok=True)
+
 csaFilenameRegex = r"^https?\:\/\/tools\.cisco\.com\/security\/center\/contentxml\/[Cc]isco[Ss]ecurity[Aa]dvisory\/cisco\-sa\-\d+\-\w+\/cvrf\/"
 
 def write_csa_to_csv(csaEntry):
 
     print ('+++ ENTERING write_csa_to_csv() ...')
     date = str(datetime.date.today())
-    print ('### Writting CSA to CSV file ...')
+#    print ('### Writting CSA to CSV file ...')
     csaContent = json.loads(csaEntry)
     csvFile = open("./REPORTS/" + date + ".csv",'wt')
  
@@ -39,7 +43,7 @@ def write_csa_to_csv(csaEntry):
     for line in csaContent['advisories']:
         print ('### Getting CSA XML description file for ' + line ['advisoryId'])
         csaFilename = './CSAs/' + re.sub(csaFilenameRegex, '', line['cvrfUrl'], 0)
-        print ('### Writting to file ', csaFilename)
+#        print ('### Writting to file ', csaFilename)
         csaFile = open(csaFilename,'wt')        
 
 #        csaFile = open("./CSAs/" + line["advisoryId"] + ".xml",'wt')
@@ -63,13 +67,13 @@ def write_csa_to_csv(csaEntry):
 
 def write_csa_to_db(csaEntry):
     print ('+++ ENTERING write_csa_to_db() ...')    
-    print ('### Writting CSA CSV file to DB: ', db)
+#    print ('### Writting CSA CSV file to DB: ', db)
     csaContent = json.loads(csaEntry)
 
     for line in csaContent["advisories"]:
         print ('### Getting CSA XML description file for ' + line ['advisoryId'] + '...')
         csaFilename = './CSAs/' + re.sub(csaFilenameRegex, '', line['cvrfUrl'], 0)
-        print ('###  Writting to file ', csaFilename)
+#        print ('###  Writting to file ', csaFilename)
         csaFile = open(csaFilename,'wt')        
 #        csaFile = open("./CSAs/" + line["advisoryId"] + ".xml",'wt')
 
